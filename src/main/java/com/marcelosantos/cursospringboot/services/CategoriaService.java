@@ -1,5 +1,6 @@
 package com.marcelosantos.cursospringboot.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class CategoriaService {
 	}
 
 	public void delete(Integer id) {
-		find(id);
+			find(id);
 		
 		try {
 			repo.deleteById(id);
@@ -46,6 +47,13 @@ public class CategoriaService {
 
 		}
 		
+	}
+
+	public List<Categoria> findAll() {
+		
+		repo.findAll();
+		
+		return repo.findAll();
 	}
 	
 	
