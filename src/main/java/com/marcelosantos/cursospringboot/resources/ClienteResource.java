@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.marcelosantos.cursospringboot.domain.Categoria;
 import com.marcelosantos.cursospringboot.domain.Cliente;
+import com.marcelosantos.cursospringboot.dto.CategoriaDTO;
 import com.marcelosantos.cursospringboot.dto.ClienteDTO;
+import com.marcelosantos.cursospringboot.dto.ClienteNewDTO;
 import com.marcelosantos.cursospringboot.services.ClienteService;
 
 @RestController
@@ -36,16 +39,16 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-//	@RequestMapping(method = RequestMethod.POST)
-//	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto){
-//		
-//		Cliente obj = service.fromDTO(objDto);
-//		
-//		obj = service.insert(obj);
-//		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-//				.path("/{id}").buildAndExpand(obj.getId()).toUri();
-//		return ResponseEntity.created(uri).build();
-//	}
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto){
+		
+		Cliente obj = service.fromDTO(objDto);
+		
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}
 	
 	@RequestMapping(value = "/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id){
