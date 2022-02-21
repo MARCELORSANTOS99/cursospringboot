@@ -2,22 +2,49 @@ package com.marcelosantos.cursospringboot.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.marcelosantos.cursospringboot.services.validation.ClienteInsert;
+
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable{
 	
 	
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message = "Prenchimento obrigatório")
+	@Length(min = 5, max=120, message = "O Tamanho deve ser entre 5 e 120 caracateres")
 	private String nome;
+	
+	@NotEmpty(message = "Prenchimento obrigatório")
+	@Email(message = "O Tamanho deve ser entre 5 e 120 caracateres")
 	private String email;
+	
+	@NotEmpty(message = "Prenchimento obrigatório")
 	private String cpfOuCnpj;
 	private Integer tipo;
+	
+	@NotEmpty(message = "Prenchimento obrigatório")
 	private String logradouro;
+	
+	@NotEmpty(message = "Prenchimento obrigatório")
 	private String numero;
+	
 	private String complemento;
+	
+	@NotEmpty(message = "Prenchimento obrigatório")
 	private String bairro;
+	
+	@NotEmpty(message = "Prenchimento obrigatório")
 	private String cep;
 	
+	@NotEmpty(message = "Prenchimento obrigatório")
 	private String telefone1;
+	
 	private String telefone2;
 	private String telefone3;
 	
