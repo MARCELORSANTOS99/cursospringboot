@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.marcelosantos.cursospringboot.domain.Categoria;
-import com.marcelosantos.cursospringboot.domain.Cliente;
 import com.marcelosantos.cursospringboot.dto.CategoriaDTO;
 import com.marcelosantos.cursospringboot.repositories.CategoriaRepository;
 import com.marcelosantos.cursospringboot.services.exception.DataIntegrityException;
