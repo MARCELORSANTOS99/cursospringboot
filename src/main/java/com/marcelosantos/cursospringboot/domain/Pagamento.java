@@ -11,10 +11,12 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.marcelosantos.cursospringboot.domain.enuns.EstadoPagamento;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Pagamento implements Serializable{
 	
 	
@@ -26,10 +28,9 @@ public abstract class Pagamento implements Serializable{
 
 	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name = "pedido_id")
+	@JoinColumn(name="pedido_id")
 	@MapsId
 	private Pedido pedido;
-	
 	
 	
 	public Pagamento() {

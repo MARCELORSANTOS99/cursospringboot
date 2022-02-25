@@ -2,9 +2,11 @@ package com.marcelosantos.cursospringboot.domain;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.marcelosantos.cursospringboot.domain.enuns.EstadoPagamento;
 
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento{
 	
 	
