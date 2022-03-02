@@ -3,8 +3,6 @@ package com.marcelosantos.cursospringboot.services;
 import java.util.Date;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +33,9 @@ public class PedidoService {
 
 	@Autowired
 	private BoletoService boletoService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@Autowired
 	private ClienteService clienteService;
@@ -65,7 +66,7 @@ public class PedidoService {
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		System.out.println(obj);
+		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
 
