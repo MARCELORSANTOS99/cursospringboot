@@ -11,14 +11,18 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.marcelosantos.cursospringboot.domain.Cidade;
 import com.marcelosantos.cursospringboot.domain.Cliente;
 import com.marcelosantos.cursospringboot.domain.Endereco;
+import com.marcelosantos.cursospringboot.domain.enuns.Perfil;
 import com.marcelosantos.cursospringboot.domain.enuns.TipoCliente;
 import com.marcelosantos.cursospringboot.dto.ClienteDTO;
 import com.marcelosantos.cursospringboot.dto.ClienteNewDTO;
 import com.marcelosantos.cursospringboot.repositories.ClienteRepository;
 import com.marcelosantos.cursospringboot.repositories.EnderecoRepository;
+import com.marcelosantos.cursospringboot.security.UserSS;
+import com.marcelosantos.cursospringboot.services.exception.AuthorizationException;
 import com.marcelosantos.cursospringboot.services.exception.DataIntegrityException;
 import com.marcelosantos.cursospringboot.services.exception.ObjectNotFoundException;
 
@@ -35,6 +39,19 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 
 	public Cliente find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		
+		System.out.println("<<<teste usuário>>>");
+		System.out.println(user);
+		System.out.println(user.hasRole(Perfil.ADMIN));
+		System.out.println(id.equals(user.getId()));
+		
+		if(user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
