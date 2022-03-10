@@ -1,5 +1,6 @@
 package com.marcelosantos.cursospringboot.services;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.marcelosantos.cursospringboot.domain.Cidade;
 import com.marcelosantos.cursospringboot.domain.Cliente;
@@ -29,6 +31,9 @@ import com.marcelosantos.cursospringboot.services.exception.ObjectNotFoundExcept
 @Service
 public class ClienteService {
 
+	@Autowired
+	private S3Service s3Service;
+	
 	@Autowired
 	private ClienteRepository repo;
 	
@@ -126,6 +131,10 @@ public class ClienteService {
 
 		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null, null);
 
+	}
+	
+	public URI uploadPrfilePicture(MultipartFile multipartFile) {
+		return s3Service.uploadFile(multipartFile);
 	}
 
 }

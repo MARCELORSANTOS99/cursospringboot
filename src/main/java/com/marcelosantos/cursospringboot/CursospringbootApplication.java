@@ -22,7 +22,7 @@ public class CursospringbootApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		s3Service.uploadFile("E:\\Pictures\\amor\\20200216_130143.jpg");
+		//s3Service.uploadFile("E:\\Pictures\\amor\\20200216_130143.jpg");
 		
 		
 	}
