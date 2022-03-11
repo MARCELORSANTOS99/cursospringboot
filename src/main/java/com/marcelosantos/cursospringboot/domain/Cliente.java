@@ -35,6 +35,8 @@ public class Cliente implements Serializable{
 	@JsonIgnore
 	private String nome;
 	
+	private String imageURL;
+	
 	@Column(unique = true)
 	private String email;
 	private String cpfOuCnpj;
@@ -140,6 +142,15 @@ public class Cliente implements Serializable{
 	}
 	
 	
+	
+
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
 
 	public String getSenha() {
 		return senha;
